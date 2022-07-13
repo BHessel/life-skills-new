@@ -6,13 +6,18 @@ export default class Favorites extends Component {
     return (
       <div className="playlist-container">
         <h1 className="playlist-header">My Playlist</h1>
-        {this.props.videos.map((vid, i) => {
+
+        {this.props.videos.map((vid, i) => (
           <>
-            <div className={`pl-gred-${i}`}>
-              <VideoCard video={vid} key={i} />
+            <div className={`pl-grid-${i}`}>
+              <VideoCard
+                video={vid}
+                key={i}
+                removeClick={this.props.removeFromFavorites}
+              />
             </div>
-          </>;
-        })}
+          </>
+        ))}
       </div>
     );
   }

@@ -4,16 +4,19 @@ import TopNavBar from "./components/TopNavBar";
 import Login from "./components/Login";
 import VideoContainer from "./components/VideoContainer";
 import Favorites from "./components/Favorites";
-
+import logo from './images/logo1.png';
+import Pagination from "react-js-pagination";
 import "./App.css";
 
+
+
 //AIzaSyBs4r7n9CX3pz634lgccEbXaHABOrYqBac
-//AIzaSyAfwqIYBrLrdr6WsciqZSWtTHeukaHApf8
+//AIzaSyBs4r7n9CX3pz634lgccEbXaHABOrYqBac
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=taxes%7Chome%20improvement&key=[YOUR_API_KEY]'
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=AIzaSyAfwqIYBrLrdr6WsciqZSWtTHeukaHApf8
-const key = "AIzaSyBs4r7n9CX3pz634lgccEbXaHABOrYqBac";
-const maxResults = 50;
-const finalUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=taxes%7Chome%20improvement&key=${key}`;
+// const key = "AIzaSyAfwqIYBrLrdr6WsciqZSWtTHeukaHApf8";
+// const maxResults = 50;
+// const finalUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=taxes%7Chome%20improvement&key=${key}`;
 
 class App extends Component {
   state = {
@@ -21,12 +24,15 @@ class App extends Component {
     currentPage: 1,
     search: "",
     favorites: [],
+    videosPerPage: 9,
   };
 
+
   componentDidMount() {
-    fetch(finalUrl)
-      .then((response) => response.json())
+    fetch('https://netflix-movie-matcher.herokuapp.com/videos')
+    .then((response) => response.json())
       .then((YTVids) => {
+        console.log(YTVids);
         const videos = YTVids.items.map((vidObj) => vidObj);
         this.setState({ videos });
       })
@@ -34,6 +40,10 @@ class App extends Component {
         console.error(error);
       });
   }
+
+  customSearch = (e) => {
+    this.setState({ search: e.target.value });
+  };
 
   addToFavorites = (video) => {
     if (!this.state.favorites.includes(video)) {
@@ -55,11 +65,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <TopNavBar />
+        <TopNavBar 
+          logo={logo}
+          customSearch={this.customSearch}
+        />
         <Routes>
-          //route exact path to login Component
           <Route path="/login" element={<Login />} />
-          //route path to favorites
           <Route
             path="/favorites"
             element={
@@ -72,20 +83,31 @@ class App extends Component {
               />
             }
           />
-          //route path to VideoContainer
           <Route
-            path="/"
+            exact path="/"
             element={
               <VideoContainer
                 videos={searchVids.slice(
                   (this.state.currentPage - 1) * 9,
                   (this.state.currentPage - 1) * 9 + 9
                 )}
+                // videos={this.state.videos}
                 addToFavorites={this.addToFavorites}
               />
             }
           />
         </Routes>
+        <Pagination
+          activePage={this.state.currentPage}
+          itemsCountPerPage={9}
+          totalItemsCount={searchVids.length}
+          pageRangeDisplayed={5}
+          onChange={(page) => this.setState({ currentPage: page })}
+          theme="dark"
+          className="pagination"
+         
+        />
+
       </div>
     );
   }

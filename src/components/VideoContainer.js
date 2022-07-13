@@ -9,11 +9,19 @@ export default class VideoContainer extends Component {
         <p className="video-subheader">
           Your Best Bet for Everything You Didn't Learn in School
         </p>
-        {this.props.videos.map((vid, i) => {
-          <div className={`vid-${i}`}>
-            <VideoCard video={vid} key={i} />
+        <div>
+        {this.props.videos.forEach((vid) => {
+
+          <div className={vid.id}>
+            <VideoCard 
+            video={vid}
+             key={vid.id}
+                
+             />
           </div>;
         })}
+        </div>
+
       </div>
     );
   }

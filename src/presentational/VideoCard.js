@@ -12,7 +12,7 @@ export default class VideoCard extends Component {
       },
     };
     return (
-      <div className="card" key="">
+      <div className="card" key={this.props.key}>
         <div className="image">
           <img
             src={this.props.video.snippet.thumbnails.default.url}
@@ -24,7 +24,7 @@ export default class VideoCard extends Component {
         </div>
         <div className="modalComponent">
           {/* <ModalVideo channel='youtube' isOpen={this.state.isOpen} videoId="" onClose={() => this.setState({isOpen: false})} /> */}
-          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={this._onReady} />;
+          <YouTube videoId={this.props.video.id.videoId} opts={opts} onReady={this._onReady} />;
           <button className="play-btn" onClick={this.openModal}>
             Play Now
           </button>

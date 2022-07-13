@@ -7,7 +7,7 @@ export default class TopNavBar extends Component {
       <div className="Navbar">
         <div className="leftSide">
           <Link to="/">
-            <img src=""></img>
+            <img src={this.props.logo} alt="logo"></img>
           </Link>
         </div>
         <div className="center-left">
@@ -15,7 +15,7 @@ export default class TopNavBar extends Component {
             className="search"
             type="text"
             placeholder="Search..."
-            onChange=""
+            onChange={(e) => this.props.customSearch(e.target.value)}
           />
           <div className="center-right">
             <button className="view-favs">

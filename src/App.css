@@ -37,6 +37,14 @@
   }
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin-top: 20px;
+  list-style: none;
+  
+}
 
 .Navbar {
   background-color: #002352;
