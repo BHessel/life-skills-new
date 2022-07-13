@@ -5,6 +5,8 @@ import Login from "./components/Login";
 import VideoContainer from "./components/VideoContainer";
 import Favorites from "./components/Favorites";
 
+import "./App.css";
+
 //AIzaSyBs4r7n9CX3pz634lgccEbXaHABOrYqBac
 //AIzaSyAfwqIYBrLrdr6WsciqZSWtTHeukaHApf8
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=taxes%7Chome%20improvement&key=[YOUR_API_KEY]'
