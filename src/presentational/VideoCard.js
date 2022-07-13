@@ -15,15 +15,15 @@ export default class VideoCard extends Component {
 
     return (
       <div className="card" key={this.props.key}>
-        {/* <div className="image">
+        <div className="image">
           <img src={this.props.video.thumbnail} alt="video thumbnail" />
-        </div> */}
-        <div className="modalComponent">
-            <YouTube videoId={this.props.video.id} opts={opts} onReady={this._onReady} />
-          <button className="play-btn">Play Now</button>
         </div>
         <div className="title">
           <p>{this.props.video.title}</p>
+        </div>
+        <div className="modalComponent">
+            <YouTube videoId={this.props.video.id} opts={opts} onReady={this._onReady} />
+          <button className="play-btn">Play Now</button>
         </div>
         <div className="conditional">
           {/* {this.state.location === "favorites" ? (
