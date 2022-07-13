@@ -33,7 +33,7 @@ class App extends Component {
     .then((response) => response.json())
       .then((YTVids) => {
         console.log(YTVids);
-        const videos = YTVids.items.map((vidObj) => vidObj);
+        const videos = YTVids.map((vidObj) => vidObj);
         this.setState({ videos });
       })
       .catch((error) => {
@@ -58,9 +58,13 @@ class App extends Component {
     this.setState({ favorites });
   };
 
+  changeCurrentPage = (numPage) => {
+    this.setState({ currentPage: numPage });
+  };
+
   render() {
     const searchVids = this.state.videos.filter((vid) =>
-      vid.snippet.title.toLowerCase().includes(this.state.search.toLowerCase())
+      vid.title.toLowerCase().includes(this.state.search.toLowerCase())
     );
 
     return (
@@ -102,9 +106,9 @@ class App extends Component {
           itemsCountPerPage={9}
           totalItemsCount={searchVids.length}
           pageRangeDisplayed={5}
-          onChange={(page) => this.setState({ currentPage: page })}
-          theme="dark"
-          className="pagination"
+          onChange={this.changeCurrentPage}
+          // theme="dark"
+          // className="pagination"
          
         />
 
